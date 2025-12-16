@@ -1,6 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "ESNext", // pra qual versão do js o código será compilado
-    "strict": true // add "use-strict", o que costuma retornar erro, caso um type seja any
-  }
-}
