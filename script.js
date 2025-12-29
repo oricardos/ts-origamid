@@ -315,23 +315,46 @@
 // }
 // button?.addEventListener('click', handleClick)
 //exercicio
-const menuMobile = document.querySelector('button#btn-mobile');
-const activeMenu = document.querySelector('nav#nav');
-function handleClick(evt) {
-    const nav = document.getElementById('nav');
-    if (evt instanceof TouchEvent) {
-        activeMenu?.classList.toggle('active');
-    }
-    const active = nav?.classList.contains('active');
-    if (menuMobile) {
-        if (active) {
-            menuMobile.setAttribute('aria-expanded', 'false');
-            menuMobile.setAttribute('aria-label', 'Abrir Menu');
-        }
-        else {
-            menuMobile.setAttribute('aria-expanded', 'true');
-            menuMobile.setAttribute('aria-label', 'Fechar Menu');
-        }
-    }
+// const menuMobile = document.querySelector('button#btn-mobile')
+// const activeMenu = document.querySelector('nav#nav')
+// function handleClick(evt: Event) {
+//     const nav = document.getElementById('nav')
+//     if (evt instanceof TouchEvent) {
+//         activeMenu?.classList.toggle('active')
+//     }
+//     const active = nav?.classList.contains('active')
+//     if (menuMobile) {
+//         if (active) {
+//             menuMobile.setAttribute('aria-expanded', 'false');
+//             menuMobile.setAttribute('aria-label', 'Abrir Menu');
+//         } else {
+//             menuMobile.setAttribute('aria-expanded', 'true');
+//             menuMobile.setAttribute('aria-label', 'Fechar Menu');
+//         }
+//     }
+// }
+// menuMobile?.addEventListener('touchstart', handleClick)
+//Generics
+function retorno(arg) {
+    return arg;
 }
-menuMobile?.addEventListener('touchstart', handleClick);
+const string = retorno('Olá mundo');
+const number = retorno(200);
+const boolean = retorno(true);
+const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const frutas = ['Maçã', 'Uva', 'Pêra', 'Banana', 'Kiwi', 'Morango', 'Manga', 'Melão', 'Melancia', 'Abacaxi'];
+// function firstFive<TipoLista>(lista: TipoLista[]): TipoLista[] {
+//     return lista.slice(0, 5);
+// }
+function firstFive(lista) {
+    return lista.slice(0, 5);
+}
+console.log(firstFive(numeros));
+console.log(firstFive(frutas));
+function notNull(arg) {
+    if (arg)
+        return arg;
+    else
+        return null;
+}
+notNull('olá');

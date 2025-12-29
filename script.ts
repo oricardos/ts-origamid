@@ -395,29 +395,58 @@
 // button?.addEventListener('click', handleClick)
 
 //exercicio
-const menuMobile = document.querySelector('button#btn-mobile')
-const activeMenu = document.querySelector('nav#nav')
+// const menuMobile = document.querySelector('button#btn-mobile')
+// const activeMenu = document.querySelector('nav#nav')
 
-function handleClick(evt: Event) {
-    const nav = document.getElementById('nav')
-    if (evt instanceof TouchEvent) {
-        activeMenu?.classList.toggle('active')
-    }
+// function handleClick(evt: Event) {
+//     const nav = document.getElementById('nav')
+//     if (evt instanceof TouchEvent) {
+//         activeMenu?.classList.toggle('active')
+//     }
 
-    const active = nav?.classList.contains('active')
+//     const active = nav?.classList.contains('active')
 
-    if (menuMobile) {
-        if (active) {
-            menuMobile.setAttribute('aria-expanded', 'false');
-            menuMobile.setAttribute('aria-label', 'Abrir Menu');
-        } else {
-            menuMobile.setAttribute('aria-expanded', 'true');
-            menuMobile.setAttribute('aria-label', 'Fechar Menu');
-        }
-    }
+//     if (menuMobile) {
+//         if (active) {
+//             menuMobile.setAttribute('aria-expanded', 'false');
+//             menuMobile.setAttribute('aria-label', 'Abrir Menu');
+//         } else {
+//             menuMobile.setAttribute('aria-expanded', 'true');
+//             menuMobile.setAttribute('aria-label', 'Fechar Menu');
+//         }
+//     }
 
+// }
+
+// menuMobile?.addEventListener('touchstart', handleClick)
+
+
+//Generics
+function retorno<T>(arg: T): T {
+    return arg;
 }
 
-menuMobile?.addEventListener('touchstart', handleClick)
+const string = retorno<string>('Olá mundo')
+const number = retorno<number>(200)
+const boolean = retorno<boolean>(true)
 
+const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const frutas = ['Maçã', 'Uva', 'Pêra', 'Banana', 'Kiwi', 'Morango', 'Manga', 'Melão', 'Melancia', 'Abacaxi']
 
+// function firstFive<TipoLista>(lista: TipoLista[]): TipoLista[] {
+//     return lista.slice(0, 5);
+// }
+
+function firstFive<T>(lista: T[]): T[] {
+    return lista.slice(0, 5);
+}
+
+console.log(firstFive<number>(numeros))
+console.log(firstFive<string>(frutas))
+
+function notNull<T>(arg: T) {
+    if (arg) return arg
+    else return null
+}
+
+notNull<string>('olá')
