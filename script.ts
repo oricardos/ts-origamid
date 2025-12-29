@@ -118,65 +118,147 @@
 // console.log(toNumber('1'))
 // console.log(toNumber({}))
 
-interface InterfaceProduto {
-    nome: string;
-    preco: number;
-    teclado: boolean;
-}
-
 //Types e Interfaces
-function preencherDados(dados: InterfaceProduto) {
-    document.body.innerHTML += `
-  <div>
-    <h2>${dados.nome}</h2>
-    <p>R$ ${dados.preco}</p>
-    <p>Inclui teclado: ${dados.teclado ? 'sim' : 'não'}</p>
-  </div>
-  `;
+// interface InterfaceProduto {
+//     nome: string;
+//     preco: number;
+//     teclado: boolean;
+// }
+
+// //Types e Interfaces
+// function preencherDados(dados: InterfaceProduto) {
+//     document.body.innerHTML += `
+//   <div>
+//     <h2>${dados.nome}</h2>
+//     <p>R$ ${dados.preco}</p>
+//     <p>Inclui teclado: ${dados.teclado ? 'sim' : 'não'}</p>
+//   </div>
+//   `;
+// }
+
+// preencherDados({
+//     nome: "Computador",
+//     preco: 2000,
+//     teclado: false
+// })
+
+// //exercicio
+// interface InterfaceEmpresa {
+//     nome: string;
+//     fundacao: number;
+//     pais: string
+// }
+
+// interface InterfaceApiProduct {
+//     nome: string;
+//     preco: number;
+//     descricao: string;
+//     garantia: string;
+//     seguroAcidentes: boolean;
+//     empresaFabricante: InterfaceEmpresa;
+//     empresaMontadora: InterfaceEmpresa;
+// }
+
+// async function fetchProduct() {
+//     const response = await fetch('https://api.origamid.dev/json/notebook.json');
+//     const data = await response.json();
+//     showProduct(data);
+// }
+
+// fetchProduct();
+
+// function showProduct(data: InterfaceApiProduct) {
+//     document.body.innerHTML = `
+//     <div>
+//       <h2>${data.nome}</h2>
+//       <p>R$ ${data.preco}</p>
+//       <div>
+//         <h3>Fabricante: ${data.empresaFabricante.nome}</h3>
+//       </div>
+//       <div>
+//         <h3>Montadora: ${data.empresaMontadora.nome}</h3>
+//       </div>
+//     </div>
+//   `;
+// }
+
+//Arrays
+// const numeros = [10, 20, 30, 40, 50, 3]
+
+// function maiorQue10(data: number[]) {
+//     return data.filter(number => number > 10)
+// }
+
+// console.log(maiorQue10(numeros))
+
+// //exercicios
+// interface InterfaceCursos {
+//     nome: string;
+//     horas: number;
+//     aulas: number;
+//     gratuito: boolean;
+//     tags: string[];
+//     idAulas: number[];
+//     nivel: 'iniciante' | 'avancado';
+// }
+
+// async function fetchCursos() {
+//     const response = await fetch('https://api.origamid.dev/json/cursos.json');
+//     const data = await response.json();
+//     mostrarCursos(data);
+// }
+
+// fetchCursos();
+
+// function mostrarCursos(cursos: Array<InterfaceCursos>) {
+//     cursos.map(curso => {
+//         return (
+//             document.body.innerHTML += `
+//      <div>
+//        <h2>${curso.nome}</h2>
+//        <p>R$ ${curso.horas}</p>
+//        <div>
+//          <h3>Aulas: ${curso.aulas}</h3>
+//        </div>
+//        <div>
+//          <h3 style="color: ${curso.nivel === 'avancado' ? 'red' : 'blue'}">Nivel: ${curso.nivel}</h3>
+//        </div>
+//      </div>
+//    `)
+//     })
+// }
+
+//Any
+// function normalizar(texto: any) {
+//     return texto.trim().toLowerCase();
+// }
+
+// normalizar(' DeSIGN');
+// normalizar(200);
+
+//Null e Undefined
+
+const button = document.querySelector('button');
+const config = localStorage.getItem('config');
+
+if (button !== null) {
+    button.click();
+}
+if (button) {
+    button.click();
+}
+if (button) button.click();
+button?.click();
+
+console.log(typeof null);
+interface Product {
+    nome?: string;
 }
 
-preencherDados({
-    nome: "Computador",
-    preco: 2000,
-    teclado: false
-})
+const livro: Product = {};
+const jogo: Product = {
+    nome: 'Ragnarok',
+};
 
-//exercicio
-interface InterfaceEmpresa {
-    nome: string;
-    fundacao: number;
-    pais: string
-}
-
-interface InterfaceApiProduct {
-    nome: string;
-    preco: number;
-    descricao: string;
-    garantia: string;
-    seguroAcidentes: boolean;
-    empresaFabricante: InterfaceEmpresa;
-    empresaMontadora: InterfaceEmpresa;
-}
-
-async function fetchProduct() {
-    const response = await fetch('https://api.origamid.dev/json/notebook.json');
-    const data = await response.json();
-    showProduct(data);
-}
-
-fetchProduct();
-
-function showProduct(data: InterfaceApiProduct) {
-    document.body.innerHTML = `
-    <div>
-      <h2>${data.nome}</h2>
-      <p>R$ ${data.preco}</p>
-      <div>
-        <h3>Fabricante: ${data.empresaFabricante.nome}</h3>
-      </div>
-      <div>
-        <h3>Montadora: ${data.empresaMontadora.nome}</h3>
-      </div>
-    </div>
-  `;
-}
+jogo.nome?.toLowerCase();
+livro.nome?.toLowerCase();
