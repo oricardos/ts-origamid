@@ -196,21 +196,67 @@
 // normalizar(' DeSIGN');
 // normalizar(200);
 //Null e Undefined
-const button = document.querySelector('button');
-const config = localStorage.getItem('config');
-if (button !== null) {
-    button.click();
+// const button = document.querySelector('button');
+// const config = localStorage.getItem('config');
+// if (button !== null) {
+//     button.click();
+// }
+// if (button) {
+//     button.click();
+// }
+// if (button) button.click();
+// button?.click();
+// console.log(typeof null);
+// interface Product {
+//     nome?: string;
+// }
+// const livro: Product = {};
+// const jogo: Product = {
+//     nome: 'Ragnarok',
+// };
+// jogo.nome?.toLowerCase();
+// livro.nome?.toLowerCase();
+//Instaceof
+class Produto {
+    nome;
+    preco;
+    constructor(nome, preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+    precoReal() {
+        return `R$ ${this.preco},00`;
+    }
 }
-if (button) {
-    button.click();
+const livro = new Produto("O Senhor dos Anéis", 200);
+console.log(livro instanceof Produto);
+class Livro {
+    autor;
+    constructor(autor) {
+        this.autor = autor;
+    }
 }
-if (button)
-    button.click();
-button?.click();
-console.log(typeof null);
-const livro = {};
-const jogo = {
-    nome: 'Ragnarok',
-};
-jogo.nome?.toLowerCase();
-livro.nome?.toLowerCase();
+class Jogo {
+    jogadores;
+    constructor(jogadores) {
+        this.jogadores = jogadores;
+    }
+}
+function buscarProduto(busca) {
+    if (busca === 'O Hobbit') {
+        return new Livro('J. R. R. Tolkien');
+    }
+    if (busca === 'Dark Souls') {
+        return new Jogo(1);
+    }
+    return null;
+}
+const produto = buscarProduto('O Hobbit');
+if (produto instanceof Livro) {
+    produto.autor;
+}
+//exercicio 
+const link = document.getElementById('origamid');
+if (link instanceof HTMLAnchorElement) {
+    link.href = link.href.replace('http://', 'https://');
+}
