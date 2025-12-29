@@ -345,3 +345,79 @@
 //     }
 // })
 
+//Eventos e Callback
+// const button = document.querySelector('button')
+
+// function handleClick(event: PointerEvent) {
+//     console.log(event.pageX)
+// }
+
+// button?.addEventListener('click', handleClick)
+
+// function handleScroll(event: Event) {
+//     console.log(event)
+// }
+
+// window.addEventListener('scroll', handleScroll)
+
+// function ativarMenu(event: Event) {
+//     console.log(event.type);
+//     if (event instanceof MouseEvent) {
+//         console.log(event.pageX);
+//     }
+//     if (event instanceof TouchEvent) {
+//         console.log(event.touches[0].pageX);
+//     }
+// }
+
+// document.documentElement.addEventListener('mousedown', ativarMenu);
+// document.documentElement.addEventListener('touchstart', ativarMenu);
+// document.documentElement.addEventListener('pointerdown', ativarMenu);
+
+
+// const button = document.querySelector('button')
+
+// function handleClick(this: HTMLButtonElement, event: MouseEvent) {
+//     console.log(this)
+// }
+
+// button?.addEventListener('click', handleClick)
+
+// const button = document.querySelector("button")
+
+// function handleClick(event: MouseEvent) {
+//     const element = event.currentTarget
+//     if (element instanceof HTMLElement) {
+//         console.log(element.innerText)
+//     }
+// }
+
+// button?.addEventListener('click', handleClick)
+
+//exercicio
+const menuMobile = document.querySelector('button#btn-mobile')
+const activeMenu = document.querySelector('nav#nav')
+
+function handleClick(evt: Event) {
+    const nav = document.getElementById('nav')
+    if (evt instanceof TouchEvent) {
+        activeMenu?.classList.toggle('active')
+    }
+
+    const active = nav?.classList.contains('active')
+
+    if (menuMobile) {
+        if (active) {
+            menuMobile.setAttribute('aria-expanded', 'false');
+            menuMobile.setAttribute('aria-label', 'Abrir Menu');
+        } else {
+            menuMobile.setAttribute('aria-expanded', 'true');
+            menuMobile.setAttribute('aria-label', 'Fechar Menu');
+        }
+    }
+
+}
+
+menuMobile?.addEventListener('touchstart', handleClick)
+
+

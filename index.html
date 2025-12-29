@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
     <title>TypeScript</title>
     <style>
-        body {
-            font-size: 1.25rem;
+        /*body {
+             font-size: 1.25rem;
             font-family: sans-serif;
-            margin: 2rem;
-        }
+            margin: 2rem; 
+            height: 2000px; 
+        }*/
     </style>
 </head>
 
@@ -21,10 +23,28 @@
     <p></p> -->
     <!-- <a id="origamid" href="http://www.origamid.com">Origamid</a> -->
     <!-- <a id="origamid" href="https://www.origamid.com">Origamid</a> -->
-
+    <!-- Eventos e callback
     <a class="link" href="/">Home</a>
     <a class="link" href="/produtos">Produtos</a>
-    <button class="link">Login</button>
+    <button class="link">Login</button> -->
+
+    <!-- Eventos e callback exercicios -->
+    <header id="header">
+        <a id="logo" href="">Logo</a>
+        <nav id="nav">
+            <button aria-label="Abrir Menu" aria-expanded="false" aria-haspopup="true" aria-controls="menu"
+                id="btn-mobile">
+                Menu
+                <span id="hamburger"></span>
+            </button>
+            <ul id="menu" role="menu">
+                <li><a href="/">Sobre</a></li>
+                <li><a href="/">Produtos</a></li>
+                <li><a href="/">Portfólio</a></li>
+                <li><a href="/">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
     <script src="script.js"></script>
 </body>
 
