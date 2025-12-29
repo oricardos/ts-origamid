@@ -101,19 +101,82 @@
 //Exercício
 // 1 - Crie uma função chamada toNumber
 // 2 - A função pode receber number | string
-function toNumber(param: number | string): number | string {
-    // 3 - Se a função receber um número, retorne um número
-    if (typeof param === 'number') {
-        return param
-    } else if (typeof param === 'string') {
-        // 4 - Se a função receber uma string, retorne um número
-        return Number(param)
-    } else {
-        // 5 - Se ela receber algo diferente, retorne um erro. (throw "value deve ser um número ou uma string")
-        throw ("param deve ser um número ou uma string")
-    }
+// function toNumber(param: number | string): number | string {
+//     // 3 - Se a função receber um número, retorne um número
+//     if (typeof param === 'number') {
+//         return param
+//     } else if (typeof param === 'string') {
+//         // 4 - Se a função receber uma string, retorne um número
+//         return Number(param)
+//     } else {
+//         // 5 - Se ela receber algo diferente, retorne um erro. (throw "value deve ser um número ou uma string")
+//         throw ("param deve ser um número ou uma string")
+//     }
+// }
+
+// console.log(toNumber(1))
+// console.log(toNumber('1'))
+// console.log(toNumber({}))
+
+interface InterfaceProduto {
+    nome: string;
+    preco: number;
+    teclado: boolean;
 }
 
-console.log(toNumber(1))
-console.log(toNumber('1'))
-// console.log(toNumber({}))
+//Types e Interfaces
+function preencherDados(dados: InterfaceProduto) {
+    document.body.innerHTML += `
+  <div>
+    <h2>${dados.nome}</h2>
+    <p>R$ ${dados.preco}</p>
+    <p>Inclui teclado: ${dados.teclado ? 'sim' : 'não'}</p>
+  </div>
+  `;
+}
+
+preencherDados({
+    nome: "Computador",
+    preco: 2000,
+    teclado: false
+})
+
+//exercicio
+interface InterfaceEmpresa {
+    nome: string;
+    fundacao: number;
+    pais: string
+}
+
+interface InterfaceApiProduct {
+    nome: string;
+    preco: number;
+    descricao: string;
+    garantia: string;
+    seguroAcidentes: boolean;
+    empresaFabricante: InterfaceEmpresa;
+    empresaMontadora: InterfaceEmpresa;
+}
+
+async function fetchProduct() {
+    const response = await fetch('https://api.origamid.dev/json/notebook.json');
+    const data = await response.json();
+    showProduct(data);
+}
+
+fetchProduct();
+
+function showProduct(data: InterfaceApiProduct) {
+    document.body.innerHTML = `
+    <div>
+      <h2>${data.nome}</h2>
+      <p>R$ ${data.preco}</p>
+      <div>
+        <h3>Fabricante: ${data.empresaFabricante.nome}</h3>
+      </div>
+      <div>
+        <h3>Montadora: ${data.empresaMontadora.nome}</h3>
+      </div>
+    </div>
+  `;
+}
