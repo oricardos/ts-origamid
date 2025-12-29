@@ -263,56 +263,85 @@
 // livro.nome?.toLowerCase();
 
 //Instaceof
-class Produto {
-    nome: string;
-    preco: number
-    constructor(nome: string, preco: number) {
-        this.nome = nome;
-        this.preco = preco;
-    }
+// class Produto {
+//     nome: string;
+//     preco: number
+//     constructor(nome: string, preco: number) {
+//         this.nome = nome;
+//         this.preco = preco;
+//     }
 
-    precoReal() {
-        return `R$ ${this.preco},00`
-    }
-}
+//     precoReal() {
+//         return `R$ ${this.preco},00`
+//     }
+// }
 
-const livro = new Produto("O Senhor dos Anéis", 200)
+// const livro = new Produto("O Senhor dos Anéis", 200)
 
-console.log(livro instanceof Produto)
+// console.log(livro instanceof Produto)
 
-class Livro {
-    autor: string;
-    constructor(autor: string) {
-        this.autor = autor;
-    }
-}
+// class Livro {
+//     autor: string;
+//     constructor(autor: string) {
+//         this.autor = autor;
+//     }
+// }
 
-class Jogo {
-    jogadores: number;
-    constructor(jogadores: number) {
-        this.jogadores = jogadores;
-    }
-}
+// class Jogo {
+//     jogadores: number;
+//     constructor(jogadores: number) {
+//         this.jogadores = jogadores;
+//     }
+// }
 
-function buscarProduto(busca: string) {
-    if (busca === 'O Hobbit') {
-        return new Livro('J. R. R. Tolkien');
-    }
-    if (busca === 'Dark Souls') {
-        return new Jogo(1);
-    }
-    return null;
-}
+// function buscarProduto(busca: string) {
+//     if (busca === 'O Hobbit') {
+//         return new Livro('J. R. R. Tolkien');
+//     }
+//     if (busca === 'Dark Souls') {
+//         return new Jogo(1);
+//     }
+//     return null;
+// }
 
-const produto = buscarProduto('O Hobbit');
+// const produto = buscarProduto('O Hobbit');
 
-if (produto instanceof Livro) {
-    produto.autor;
-}
+// if (produto instanceof Livro) {
+//     produto.autor;
+// }
 
-//exercicio 
-const link = document.getElementById('origamid')
+// //exercicio 
+// const link = document.getElementById('origamid')
 
-if (link instanceof HTMLAnchorElement) {
-    link.href = link.href.replace('http://', 'https://')
-}
+// if (link instanceof HTMLAnchorElement) {
+//     link.href = link.href.replace('http://', 'https://')
+// }
+
+// document.querySelector('video'); // HTMLVideoElement
+// document.querySelector('img'); // HTMLImageElement
+
+// const link1 = document.querySelector('a'); // HTMLAnchorElement
+// const link2 = document.querySelector('#origamid'); // Element
+
+// link1?.href;
+// link2?.href; // erro no ts
+
+
+// const links = document.querySelectorAll('.link')
+
+// const randomColor = ['#1F77B4', '#FF7F0E', '#2CA02C', '#D62728', '#9467BD', '#8C564B']
+
+// const randomPosition = Number((Math.random() * 6).toFixed(0))
+
+// function modifyColorAndBorder(item: HTMLAnchorElement | HTMLButtonElement, position: number) {
+//     item.style.border = '2px solid'
+//     item.style.color = randomColor[position]
+//     item.style.borderColor = randomColor[position]
+// }
+
+// links.forEach((link) => {
+//     if (link instanceof HTMLAnchorElement || link instanceof HTMLButtonElement) {
+//         modifyColorAndBorder(link, randomPosition)
+//     }
+// })
+
