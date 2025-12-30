@@ -450,3 +450,39 @@ function notNull<T>(arg: T) {
 }
 
 notNull<string>('olá')
+
+function extractText<T extends HTMLElement>(el: T) {
+    return el.innerText
+}
+
+const link = document.querySelector('.link')
+// link.href sem o tipo no querySelector, a variável perde a referência que é um link
+// então não reconhece e não faz o autocomplete do href (exemplo)
+
+const link2 = document.querySelector<HTMLAnchorElement>('.link')
+// link2?.href aqui, com o tipo no querySelector, ele reconhece o link2 como sendo um link
+// o href passa a existir no link2
+
+// mas a forma mais segura seria:
+if (link instanceof HTMLAnchorElement) {
+    link.href
+}
+
+//exemplo
+async function getData<T>(url: string): Promise<T> {
+    const response = await fetch(url);
+    return await response.json();
+}
+
+interface Notebook {
+    nome: string;
+}
+
+async function handleData() {
+    const notebook = await getData<Notebook>(
+        'https://api.origamid.dev/json/notebook.json',
+    );
+    console.log(notebook.nome);
+}
+
+
