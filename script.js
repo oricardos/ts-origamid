@@ -455,17 +455,67 @@
 //     }
 // }
 // Unknown
-function typeGuard(value) {
-    if (typeof value === 'string') {
-        return value.toLowerCase();
+// function typeGuard(value: unknown) {
+//     if (typeof value === 'string') {
+//         return value.toLowerCase();
+//     }
+//     if (typeof value === 'number') {
+//         return value.toFixed();
+//     }
+//     if (value instanceof HTMLElement) {
+//         return value.innerText;
+//     }
+// }
+// typeGuard('Origamid');
+// typeGuard(200);
+// typeGuard(document.body);
+//User Type Guard
+// async function fetchCursos() {
+//   const response = await fetch('https://api.origamid.dev/json/cursos.json');
+//   const json = await response.json();
+//   handleCursos(json);
+// }
+// fetchCursos();
+// function handleCursos(data: unknown) {
+//   if (data instanceof Array) {
+//     console.log('É instância de Array');
+//   }
+//   if (Array.isArray(data)) {
+//     console.log('É array');
+//   }
+// }
+//exercicio
+// 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
+async function fetchCursos() {
+    const response = await fetch('https://api.origamid.dev/json/cursos.json');
+    const json = await response.json();
+    handleCursos(json);
+}
+fetchCursos();
+// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
+function isCurso(curso) {
+    if (curso &&
+        typeof curso === 'object' &&
+        'nome' in curso &&
+        'horas' in curso &&
+        'tags' in curso) {
+        return true;
     }
-    if (typeof value === 'number') {
-        return value.toFixed();
-    }
-    if (value instanceof HTMLElement) {
-        return value.innerText;
+    else {
+        return false;
     }
 }
-typeGuard('Origamid');
-typeGuard(200);
-typeGuard(document.body);
+// 4 - Use Type Guards para garantir a Type Safety do código
+function handleCursos(data) {
+    if (Array.isArray(data)) {
+        data.filter(isCurso).forEach((item) => {
+            document.body.innerHTML += `
+        <div>
+          <h2>${item.nome}</h2>
+          <p>${item.horas}</p>
+          <p>${item.tags.join(', ')}</p>
+        </div>
+      `;
+        });
+    }
+}
