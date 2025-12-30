@@ -422,67 +422,135 @@
 
 
 //Generics
-function retorno<T>(arg: T): T {
-    return arg;
-}
+// function retorno<T>(arg: T): T {
+//     return arg;
+// }
 
-const string = retorno<string>('Olá mundo')
-const number = retorno<number>(200)
-const boolean = retorno<boolean>(true)
+// const string = retorno<string>('Olá mundo')
+// const number = retorno<number>(200)
+// const boolean = retorno<boolean>(true)
 
-const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-const frutas = ['Maçã', 'Uva', 'Pêra', 'Banana', 'Kiwi', 'Morango', 'Manga', 'Melão', 'Melancia', 'Abacaxi']
+// const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// const frutas = ['Maçã', 'Uva', 'Pêra', 'Banana', 'Kiwi', 'Morango', 'Manga', 'Melão', 'Melancia', 'Abacaxi']
 
-// function firstFive<TipoLista>(lista: TipoLista[]): TipoLista[] {
+// // function firstFive<TipoLista>(lista: TipoLista[]): TipoLista[] {
+// //     return lista.slice(0, 5);
+// // }
+
+// function firstFive<T>(lista: T[]): T[] {
 //     return lista.slice(0, 5);
 // }
 
-function firstFive<T>(lista: T[]): T[] {
-    return lista.slice(0, 5);
-}
+// console.log(firstFive<number>(numeros))
+// console.log(firstFive<string>(frutas))
 
-console.log(firstFive<number>(numeros))
-console.log(firstFive<string>(frutas))
+// function notNull<T>(arg: T) {
+//     if (arg) return arg
+//     else return null
+// }
 
-function notNull<T>(arg: T) {
-    if (arg) return arg
-    else return null
-}
+// notNull<string>('olá')
 
-notNull<string>('olá')
+// function extractText<T extends HTMLElement>(el: T) {
+//     return el.innerText
+// }
 
-function extractText<T extends HTMLElement>(el: T) {
-    return el.innerText
-}
+// const link = document.querySelector('.link')
+// // link.href sem o tipo no querySelector, a variável perde a referência que é um link
+// // então não reconhece e não faz o autocomplete do href (exemplo)
 
-const link = document.querySelector('.link')
-// link.href sem o tipo no querySelector, a variável perde a referência que é um link
-// então não reconhece e não faz o autocomplete do href (exemplo)
+// const link2 = document.querySelector<HTMLAnchorElement>('.link')
+// // link2?.href aqui, com o tipo no querySelector, ele reconhece o link2 como sendo um link
+// // o href passa a existir no link2
 
-const link2 = document.querySelector<HTMLAnchorElement>('.link')
-// link2?.href aqui, com o tipo no querySelector, ele reconhece o link2 como sendo um link
-// o href passa a existir no link2
+// // mas a forma mais segura seria:
+// if (link instanceof HTMLAnchorElement) {
+//     link.href
+// }
 
-// mas a forma mais segura seria:
-if (link instanceof HTMLAnchorElement) {
-    link.href
-}
+// //exemplo
+// async function getData<T>(url: string): Promise<T> {
+//     const response = await fetch(url);
+//     return await response.json();
+// }
 
-//exemplo
-async function getData<T>(url: string): Promise<T> {
-    const response = await fetch(url);
-    return await response.json();
-}
+// interface Notebook {
+//     nome: string;
+// }
 
-interface Notebook {
-    nome: string;
-}
-
-async function handleData() {
-    const notebook = await getData<Notebook>(
-        'https://api.origamid.dev/json/notebook.json',
-    );
-    console.log(notebook.nome);
-}
+// async function handleData() {
+//     const notebook = await getData<Notebook>(
+//         'https://api.origamid.dev/json/notebook.json',
+//     );
+//     console.log(notebook.nome);
+// }
 
 
+//functions
+// A interface de uma função é definida durante a sua declaração.
+// function somar(a: number, b: number, c?: number): number {
+//   return a + b + (c ? c : 0);
+// }
+// somar(3, 4);
+// somar(3, 4, 1);
+
+// const subtrair = (a: number, b: number): number => a - b;
+
+// subtrair(10, 2);
+
+// function pintarTela(cor: string) {
+//   document.body.style.background = cor;
+// }
+
+// pintarTela('black');
+
+// // Erro, void não pode ser verificado
+// if (pintarTela('black')) {
+// }
+
+//O never é utilizado em casos onde a função gera um erro ou termina a aplicação.
+// function abortar(mensagem: string): never {
+//   throw new Error(mensagem);
+// }
+
+// abortar('Um erro ocorreu');
+// console.log('Tente novamente');
+
+// interface Quadrado {
+//     lado: number;
+//     perimetro(lado: number): number;
+// }
+
+// function calcular(forma: Quadrado) {
+//     forma.perimetro(3)
+// }
+
+// // Overload
+// function normalizar(value: string): string;
+// function normalizar(value: string[]): string[];
+// function normalizar(value: string | string[]): string | string[] {
+//     if (typeof value === 'string') {
+//         return value.trim().toLowerCase()
+//     } else {
+//         return value.map(val => val.trim().toLowerCase())
+//     }
+// }
+
+// console.log(normalizar('  TeStE ').toUpperCase())
+// console.log(normalizar([' tEsTe dE ArRaY     ', 'TESTE DE ARRAY']))
+
+// // exercicio
+// function roundsUp(value: number): number;
+// function roundsUp(value: string): string;
+// function roundsUp(value: string | number): string | number {
+//     if (typeof value === 'string') {
+//         const transform = Math.ceil(Number(value))
+//         return String(transform)
+//     } else {
+//         return Math.ceil(Number(value))
+//     }
+// }
+
+// console.log(roundsUp(44.7))
+
+// Type Guard e Control Flow
