@@ -706,25 +706,59 @@
 // (video4 as HTMLVideoElement).volume;
 
 //Destructuring
-const { body }: { body: HTMLElement } = document
+// const { body }: { body: HTMLElement } = document
 
-function handleData({ nome, preco }: { nome: string; preco: number }) {
-    nome.toLowerCase()
-    preco.toFixed()
+// function handleData({ nome, preco }: { nome: string; preco: number }) {
+//     nome.toLowerCase()
+//     preco.toFixed()
+// }
+
+// handleData({
+//     nome: 'Notebook',
+//     preco: 2000
+// })
+
+// function comparar(tipo: string, ...numeros: number[]) {
+//     if (tipo === 'menor') {
+//         return Math.min(...numeros)
+//     }
+//     if (tipo === 'maior') {
+//         return Math.max(...numeros)
+//     }
+// }
+
+// comparar('menor', 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+// Intersection
+type Produto = {
+    preco: number;
 }
 
-handleData({
-    nome: 'Notebook',
-    preco: 2000
-})
-
-function comparar(tipo: string, ...numeros: number[]) {
-    if (tipo === 'menor') {
-        return Math.min(...numeros)
-    }
-    if (tipo === 'maior') {
-        return Math.max(...numeros)
-    }
+type Carro = {
+    rodas: number;
+    portas: number;
 }
 
-comparar('menor', 1, 2, 3, 4, 5, 6, 7, 8, 9)
+type Livro = {
+    paginas: number;
+}
+
+function handleProdutoCarro(dados: Produto & Carro) {
+    dados.rodas;
+    dados.portas;
+    dados.preco
+}
+
+handleProdutoCarro({ rodas: 4, portas: 4, preco: 300000 })
+
+// não é possível adicionar novas propriedades no type
+// já na interface isso é possível
+
+interface InterfaceCarro {
+    direcaoEletrica: boolean;
+    vidrosEletricos: boolean;
+}
+
+interface InterfaceCarro {
+    potencia: number
+}
