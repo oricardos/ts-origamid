@@ -730,35 +730,97 @@
 // comparar('menor', 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 // Intersection
-type Produto = {
-    preco: number;
-}
+// type Produto = {
+//     preco: number;
+// }
 
-type Carro = {
-    rodas: number;
-    portas: number;
-}
+// type Carro = {
+//     rodas: number;
+//     portas: number;
+// }
 
-type Livro = {
-    paginas: number;
-}
+// type Livro = {
+//     paginas: number;
+// }
 
-function handleProdutoCarro(dados: Produto & Carro) {
-    dados.rodas;
-    dados.portas;
-    dados.preco
-}
+// function handleProdutoCarro(dados: Produto & Carro) {
+//     dados.rodas;
+//     dados.portas;
+//     dados.preco
+// }
 
-handleProdutoCarro({ rodas: 4, portas: 4, preco: 300000 })
+// handleProdutoCarro({ rodas: 4, portas: 4, preco: 300000 })
 
-// não é possível adicionar novas propriedades no type
-// já na interface isso é possível
+// // não é possível adicionar novas propriedades no type
+// // já na interface isso é possível
 
-interface InterfaceCarro {
-    direcaoEletrica: boolean;
-    vidrosEletricos: boolean;
-}
+// interface InterfaceCarro {
+//     direcaoEletrica: boolean;
+//     vidrosEletricos: boolean;
+// }
 
-interface InterfaceCarro {
-    potencia: number
-}
+// interface InterfaceCarro {
+//     potencia: number
+// }
+
+//exercicio
+// interface Window {
+//     UserData: any;
+// }
+
+// window.UserData = {};
+
+// function validJSON(str: string) {
+//     try {
+//         JSON.parse(str);
+//     } catch (e) {
+//         return false;
+//     }
+//     return true;
+// }
+
+// interface UserData {
+//     nome?: string;
+//     email?: string;
+//     cpf?: string;
+// }
+
+// function isUserData(obj: unknown): obj is UserData {
+//     if (
+//         obj &&
+//         typeof obj === 'object' &&
+//         ('nome' in obj || 'email' in obj || 'cpf' in obj)
+//     ) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+
+// function loadLocalStorage() {
+//     const localUserData = localStorage.getItem('UserData');
+//     if (localUserData && validJSON(localUserData)) {
+//         const UserData = JSON.parse(localUserData);
+//         if (isUserData(UserData)) {
+//             Object.entries(UserData).forEach(([key, value]) => {
+//                 const input = document.getElementById(key);
+//                 if (input instanceof HTMLInputElement) {
+//                     input.value = value;
+//                     window.UserData[key] = value;
+//                 }
+//             });
+//         }
+//     }
+// }
+
+// loadLocalStorage();
+
+// function handleInput({ target }: KeyboardEvent) {
+//     if (target instanceof HTMLInputElement) {
+//         window.UserData[target.id] = target.value;
+//         localStorage.setItem('UserData', JSON.stringify(window.UserData));
+//     }
+// }
+
+// const form = document.querySelector<HTMLElement>('#form');
+// form?.addEventListener('keyup', handleInput);

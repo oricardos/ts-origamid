@@ -7,12 +7,24 @@
     <link href="style.css" rel="stylesheet" />
     <title>TypeScript</title>
     <style>
-        /*body {
-             font-size: 1.25rem;
+        body {
+            font-size: 1.25rem;
             font-family: sans-serif;
-            margin: 2rem; 
-            height: 2000px; 
-        }*/
+            margin: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            min-width: 50vw;
+            max-width: 100%;
+        }
     </style>
 </head>
 
@@ -29,7 +41,7 @@
     <button class="link">Login</button> -->
 
     <!-- Eventos e callback exercicios -->
-    <header id="header">
+    <!-- <header id="header">
         <a id="logo" href="">Logo</a>
         <nav id="nav">
             <button aria-label="Abrir Menu" aria-expanded="false" aria-haspopup="true" aria-controls="menu"
@@ -44,7 +56,16 @@
                 <li><a href="/">Contato</a></li>
             </ul>
         </nav>
-    </header>
+    </header> -->
+    <form action="" id="form">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" />
+        <button class="mostrar-userData">mostrar userData</button>
+    </form>
     <script src="script.js"></script>
 </body>
 
