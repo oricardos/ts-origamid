@@ -486,36 +486,84 @@
 // }
 //exercicio
 // 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
-async function fetchCursos() {
-    const response = await fetch('https://api.origamid.dev/json/cursos.json');
-    const json = await response.json();
-    handleCursos(json);
-}
-fetchCursos();
-// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
-function isCurso(curso) {
-    if (curso &&
-        typeof curso === 'object' &&
-        'nome' in curso &&
-        'horas' in curso &&
-        'tags' in curso) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-// 4 - Use Type Guards para garantir a Type Safety do código
-function handleCursos(data) {
-    if (Array.isArray(data)) {
-        data.filter(isCurso).forEach((item) => {
-            document.body.innerHTML += `
-        <div>
-          <h2>${item.nome}</h2>
-          <p>${item.horas}</p>
-          <p>${item.tags.join(', ')}</p>
-        </div>
-      `;
-        });
-    }
-}
+// async function fetchCursos() {
+//     const response = await fetch('https://api.origamid.dev/json/cursos.json')
+//     const json = await response.json()
+//     handleCursos(json)
+// }
+// fetchCursos()
+// // 2 - Defina a interface da API
+// interface Curso {
+//     nome: string;
+//     horas: number;
+//     tags: string[]
+// }
+// // 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
+// function isCurso(curso: unknown): curso is Curso {
+//     if (
+//         curso &&
+//         typeof curso === 'object' &&
+//         'nome' in curso &&
+//         'horas' in curso &&
+//         'tags' in curso
+//     ) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+// // 4 - Use Type Guards para garantir a Type Safety do código
+// function handleCursos(data: unknown) {
+//     if (Array.isArray(data)) {
+//         data.filter(isCurso).forEach((item) => {
+//             document.body.innerHTML += `
+//         <div>
+//           <h2>${item.nome}</h2>
+//           <p>${item.horas}</p>
+//           <p>${item.tags.join(', ')}</p>
+//         </div>
+//       `;
+//         });
+//     }
+// }
+// Type Assertion
+// const video = document.querySelector('.player') as HTMLVideoElement;
+// // erro runtime, não existe volume de null
+// video.volume;
+// erro TS, possíveis dados devem ser compatíveis com Element | null
+//const link = document.querySelector('.link') as string;
+// interface Produto {
+//     nome: string;
+//     preco: number;
+// }
+// async function fetchProduto() {
+//     const response = await fetch('https://api.origamid.dev/json/notebook.json');
+//     return response.json() as Promise<Produto>;
+// }
+// // Podemos usar o as em diferentes locais.
+// async function handleProduto1() {
+//     const produto = await fetchProduto();
+//     produto.nome;
+// }
+// async function handleProduto2() {
+//     const produto = (await fetchProduto()) as Produto;
+//     produto.nome;
+// }
+// async function handleProduto3() {
+//     const produto = await fetchProduto();
+//     (produto as Produto).nome;
+// }
+// const video = document.querySelector('video')!;
+// // erro runtime, não existe volume de null
+// video.volume;
+// // erro runtime
+// document.querySelector('a')!.href = 'https://www.origamid.com';
+// // sintaxes alternativas
+// const video1 = document.querySelector('.player') as HTMLVideoElement;
+// const video2 = <HTMLVideoElement>document.querySelector('.player');
+// const video3 = document.querySelector<HTMLVideoElement>('.player');
+// const video4 = document.querySelector('.player');
+// video1.volume;
+// video2.volume;
+// video3?.volume;
+// (video4 as HTMLVideoElement).volume;
