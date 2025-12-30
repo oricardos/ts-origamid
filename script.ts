@@ -704,3 +704,27 @@
 // video2.volume;
 // video3?.volume;
 // (video4 as HTMLVideoElement).volume;
+
+//Destructuring
+const { body }: { body: HTMLElement } = document
+
+function handleData({ nome, preco }: { nome: string; preco: number }) {
+    nome.toLowerCase()
+    preco.toFixed()
+}
+
+handleData({
+    nome: 'Notebook',
+    preco: 2000
+})
+
+function comparar(tipo: string, ...numeros: number[]) {
+    if (tipo === 'menor') {
+        return Math.min(...numeros)
+    }
+    if (tipo === 'maior') {
+        return Math.max(...numeros)
+    }
+}
+
+comparar('menor', 1, 2, 3, 4, 5, 6, 7, 8, 9)
