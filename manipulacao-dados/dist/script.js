@@ -6,6 +6,22 @@ async function handleData() {
         return;
     const transacoes = data.map(normalizarTransacao);
     fillTable(transacoes);
+    fillStatistics(transacoes);
+}
+function filterValue(transacao) {
+    return transacao.valor !== null;
+}
+function fillStatistics(transacoes) {
+    const total = transacoes.filter(filterValue).reduce((acc, item) => {
+        return acc + item.valor;
+    }, 0);
+    const totalElement = document.querySelector('#total span');
+    if (totalElement) {
+        totalElement.innerText = total.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    }
 }
 function fillTable(transacoes) {
     const table = document.querySelector('#transacoes tbody');
