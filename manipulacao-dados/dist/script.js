@@ -1,7 +1,10 @@
 import fetchData from "./fetchData.js";
+import normalizarTransacao from "./normalizarTransacao.js";
 async function handleData() {
     const data = await fetchData('https://api.origamid.dev/json/transacoes.json');
-    console.log(data);
+    if (!data)
+        return;
+    const transacoes = data.map(normalizarTransacao);
 }
 handleData();
 //# sourceMappingURL=script.js.map
