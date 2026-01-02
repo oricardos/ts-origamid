@@ -3,24 +3,24 @@ import stringToDate from "./stringToDate.js";
 
 declare global {
     type TransacaoPagamento = "Boleto" | "Cartão de Crédito";
-    type TrasacaoStatus = "Paga" | "Recusada pela operadora de cartão" | "Aguardando pagamento" | "Estornada";
+    type TransacaoStatus = "Paga" | "Recusada pela operadora de cartão" | "Aguardando pagamento" | "Estornada";
 
     interface TransacaoAPI {
         Nome: string;
         ID: number;
         Data: string;
-        Status: TrasacaoStatus;
+        Status: TransacaoStatus;
         Email: string;
         ['Valor (R$)']: string;
         ['Cliente Novo']: number;
         ['Forma de Pagamento']: TransacaoPagamento;
     }
 
-    interface Trasacao {
+    interface Transacao {
         nome: string;
         id: number;
-        data: string;
-        status: TrasacaoStatus;
+        data: Date;
+        status: TransacaoStatus;
         email: string;
         moeda: string;
         valor: number | null;
@@ -29,7 +29,7 @@ declare global {
     }
 }
 
-export default function normalizarTransacao(transacao: TransacaoAPI) {
+export default function normalizarTransacao(transacao: TransacaoAPI): Transacao {
     return {
         nome: transacao.Nome,
         id: transacao.ID,
