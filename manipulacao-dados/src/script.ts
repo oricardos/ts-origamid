@@ -1,3 +1,4 @@
+import countBy, { CountList } from "./countBy.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 
@@ -16,19 +17,32 @@ function filterValue(transacao: Transacao): transacao is TransacaoValor {
     return transacao.valor !== null
 }
 
+function fillList(list: CountList, id: string): void {
+    const totalElement = document.getElementById(id)
+    if (totalElement) {
+        Object.keys(list).forEach(key => {
+            totalElement.innerHTML += `<p>${key}: ${list[key]}</p>`
+        })
+    }
+}
+
 function fillStatistics(transacoes: Transacao[]): void {
-    const total = transacoes.filter(filterValue).reduce((acc, item) => {
+    const totalValue = transacoes.filter(filterValue).reduce((acc, item) => {
         return acc + item.valor
     }, 0)
-
     const totalElement = document.querySelector<HTMLElement>('#total span')
-
     if (totalElement) {
-        totalElement.innerText = total.toLocaleString('pt-BR', {
+        totalElement.innerText = totalValue.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         })
     }
+
+    const totalPagamentoValue = countBy(transacoes.map(({ pagamento }) => pagamento))
+    fillList(totalPagamentoValue, 'pagamento')
+
+    const totalStatusValue = countBy(transacoes.map(({ status }) => status))
+    fillList(totalStatusValue, 'status')
 }
 
 function fillTable(transacoes: Transacao[]): void {

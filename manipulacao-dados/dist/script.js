@@ -1,3 +1,4 @@
+import countBy from "./countBy.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 async function handleData() {
@@ -11,17 +12,29 @@ async function handleData() {
 function filterValue(transacao) {
     return transacao.valor !== null;
 }
+function fillList(list, id) {
+    const totalElement = document.getElementById(id);
+    if (totalElement) {
+        Object.keys(list).forEach(key => {
+            totalElement.innerHTML += `<p>${key}: ${list[key]}</p>`;
+        });
+    }
+}
 function fillStatistics(transacoes) {
-    const total = transacoes.filter(filterValue).reduce((acc, item) => {
+    const totalValue = transacoes.filter(filterValue).reduce((acc, item) => {
         return acc + item.valor;
     }, 0);
     const totalElement = document.querySelector('#total span');
     if (totalElement) {
-        totalElement.innerText = total.toLocaleString('pt-BR', {
+        totalElement.innerText = totalValue.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         });
     }
+    const totalPagamentoValue = countBy(transacoes.map(({ pagamento }) => pagamento));
+    fillList(totalPagamentoValue, 'pagamento');
+    const totalStatusValue = countBy(transacoes.map(({ status }) => status));
+    fillList(totalStatusValue, 'status');
 }
 function fillTable(transacoes) {
     const table = document.querySelector('#transacoes tbody');
