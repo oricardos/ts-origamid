@@ -9,6 +9,8 @@ export default class Slide {
     timeout;
     pausedTimeout;
     paused;
+    thumbItems;
+    thumb;
     constructor(container, slides, controls, time = 5000) {
         this.container = container;
         this.slides = slides;
@@ -19,19 +21,29 @@ export default class Slide {
         this.index = localStorage.getItem("activeSlide") ? Number(localStorage.getItem("activeSlide")) : 0;
         this.slide = this.slides[this.index];
         this.paused = false;
+        this.thumbItems = null;
+        this.thumb = null;
         this.init();
     }
+    ;
     hide(element) {
         element.classList.remove('active');
         if (element instanceof HTMLVideoElement) {
             element.currentTime = 0;
             element.pause();
         }
+        ;
     }
+    ;
     show(index) {
         this.index = index;
         this.slide = this.slides[this.index];
         localStorage.setItem('activeSlide', String(this.index));
+        if (this.thumbItems) {
+            this.thumb = this.thumbItems[this.index];
+            this.thumbItems.forEach(item => item.classList.remove('active'));
+            this.thumb.classList.add('active');
+        }
         this.slides.forEach(slide => this.hide(slide));
         this.slide.classList.add('active');
         if (this.slide instanceof HTMLVideoElement) {
@@ -40,7 +52,9 @@ export default class Slide {
         else {
             this.auto(this.time);
         }
+        ;
     }
+    ;
     autoVideo(video) {
         video.muted = true;
         video.play();
@@ -50,11 +64,16 @@ export default class Slide {
                 this.auto(video.duration * 1000);
                 firstPlay = false;
             }
+            ;
         });
     }
+    ;
     auto(time) {
         this.timeout?.clear();
         this.timeout = new Timeout(() => this.next(), time);
+        if (this.thumb) {
+            this.thumb.style.animationDuration = `${time}ms`;
+        }
     }
     prev() {
         if (this.paused)
@@ -62,31 +81,42 @@ export default class Slide {
         const prev = this.index > 0 ? this.index - 1 : this.slides.length - 1;
         this.show(prev);
     }
+    ;
     next() {
         if (this.paused)
             return;
         const next = this.index + 1 < this.slides.length ? this.index + 1 : 0;
         this.show(next);
     }
+    ;
     pause() {
         this.pausedTimeout = new Timeout(() => {
             this.timeout?.pause();
             this.paused = true;
+            if (this.thumb)
+                this.thumb.classList.add('paused');
             if (this.slide instanceof HTMLVideoElement) {
                 this.slide.pause();
             }
+            ;
         }, 300);
     }
+    ;
     continue() {
         this.pausedTimeout?.clear();
         if (this.paused) {
             this.paused = false;
+            if (this.thumb)
+                this.thumb.classList.remove('paused');
             this.timeout?.continue();
             if (this.slide instanceof HTMLVideoElement) {
                 this.slide.pause();
             }
+            ;
         }
+        ;
     }
+    ;
     addControls() {
         const prevButton = document.createElement("button");
         const nextButton = document.createElement("button");
@@ -99,8 +129,24 @@ export default class Slide {
         prevButton.addEventListener('pointerup', () => this.prev());
         nextButton.addEventListener('pointerup', () => this.next());
     }
+    ;
+    addThumbItems() {
+        const thumbContainer = document.createElement('div');
+        thumbContainer.id = 'slide-thumb';
+        for (let i = 0; i < this.slides.length; i++) {
+            thumbContainer.innerHTML += `
+                <span>
+                    <span class="thumb-item"></span>
+                </span>
+            `;
+        }
+        ;
+        this.controls.appendChild(thumbContainer);
+        this.thumbItems = Array.from(document.querySelectorAll(".thumb-item"));
+    }
     init() {
         this.addControls();
+        this.addThumbItems();
         this.show(this.index);
     }
 }
