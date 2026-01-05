@@ -71,7 +71,7 @@ export default class Slide {
         this.pausedTimeout?.clear()
         if (this.paused) {
             this.paused = false
-            this.auto(this.time)
+            this.timeout?.continue()
         }
     }
 
